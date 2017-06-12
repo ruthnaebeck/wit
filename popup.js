@@ -17,7 +17,7 @@ function renderHTML(value) {
   document.getElementById('witLI').innerHTML = value;
 }
 
-function scroll() {
+function onScroll() {
   chrome.tabs.executeScript(null,
       {code: `
         window.addEventListener('scroll', function(e){
@@ -27,11 +27,26 @@ function scroll() {
   window.close()
 }
 
+function cleanFeed() {
+  chrome.tabs.executeScript(null,
+      {code: `
+        window.addEventListener('scroll', function(e){
+          [].forEach.call(document.querySelectorAll('.feed-s-connection-updates'),function(e){
+            e.parentNode.removeChild(e);
+          })
+        })
+      `})
+  window.close()
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
     if(url === 'https://www.linkedin.com/mynetwork/'){
       renderHTML('Filtering...')
-      scroll()
+      onScroll()
+    }else if(url === 'https://www.linkedin.com/feed/'){
+      renderHTML('Filtering...')
+      cleanFeed()
     }else{
       renderHTML('Please navigate to https://www.linkedin.com/mynetwork/')
     }
