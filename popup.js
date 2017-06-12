@@ -17,10 +17,17 @@ function renderHTML(value) {
   document.getElementById('witLI').innerHTML = value;
 }
 
+function click() {
+  chrome.tabs.executeScript(null,
+      {code: 'window.scroll(0, 10000)'})
+  window.close()
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
     if(url === 'https://www.linkedin.com/mynetwork/'){
-      renderHTML('The current URL is: ' + url)
+      renderHTML('Filtering...')
+      click()
     }else{
       renderHTML('Please navigate to https://www.linkedin.com/mynetwork/')
     }
