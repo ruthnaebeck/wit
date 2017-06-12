@@ -36,7 +36,9 @@ function cleanFeed() {
           })
         })
       `})
-  window.close()
+  setTimeout(function(){
+    window.close()
+  }, 1000)
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
       renderHTML('Filtering...')
       onScroll()
     }else if(url === 'https://www.linkedin.com/feed/'){
-      renderHTML('Filtering...')
+      renderHTML('Feed will be cleaned as you scroll.')
       cleanFeed()
     }else{
       renderHTML('Please navigate to https://www.linkedin.com/mynetwork/')
