@@ -17,9 +17,13 @@ function renderHTML(value) {
   document.getElementById('witLI').innerHTML = value;
 }
 
-function click() {
+function scroll() {
   chrome.tabs.executeScript(null,
-      {code: 'window.scroll(0, 10000)'})
+      {code: `
+        window.addEventListener('scroll', function(e){
+          console.log('test', document.documentElement.scrollHeight)
+        })
+      `})
   window.close()
 }
 
@@ -27,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
     if(url === 'https://www.linkedin.com/mynetwork/'){
       renderHTML('Filtering...')
-      click()
+      scroll()
     }else{
       renderHTML('Please navigate to https://www.linkedin.com/mynetwork/')
     }
