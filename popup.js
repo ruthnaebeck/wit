@@ -25,7 +25,23 @@ function consoleLog() {
         clarApp.models.predict('c0c0ac362b03416da06ab3fa36fb58e3', image.src)
         .then(
           function(response) {
-            console.log(image.alt, response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[1].name, response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[1].value)
+            var genders = response.outputs[0].data.regions[0].data.face.gender_appearance.concepts
+            var percentFemale = 0
+            var gender = 'unknown'
+            if(genders[0].name === 'feminine'){
+              gender = genders[0].name
+              percentFemale = genders[0].value
+            }else{
+              gender = genders[1].name
+              percentFemale = genders[1].value
+            }
+            console.log(image.alt, gender, percentFemale)
+            if(percentFemale < .5){
+              image.closest('li.mn-pymk-list__card').remove()
+              console.log('REMOVED')
+            }else{
+              console.log('FEMALE')
+            }
           },
           function(err) {
             console.log('Error', err)
