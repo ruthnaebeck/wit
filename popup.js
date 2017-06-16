@@ -1,4 +1,14 @@
-/* global chrome */
+/* global chrome clarApp */
+
+// clarApp.models.predict('c0c0ac362b03416da06ab3fa36fb58e3', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAvzAAAAJDAxZGE0OWM4LTk3M2UtNDE5Ny1iM2YxLTkxOGJmMDFjZGQwZg.jpg')
+//   .then(
+//     function(response) {
+//       console.log('Response', response)
+//     },
+//     function(err) {
+//       console.log('Error', err)
+//     }
+//   )
 
 function getCurrentTabUrl(callback) {
   var queryInfo = {
@@ -11,6 +21,20 @@ function getCurrentTabUrl(callback) {
     console.assert(typeof url == 'string', 'tab.url should be a string')
     callback(url)
   })
+}
+
+function consoleLog() {
+  chrome.tabs.executeScript(null,
+      {code: `
+        var clarApp = new Clarifai.App(
+          'zYOQwhlm1J3ylwqW4AZyArXbDvmxMfNh521S4iYH',
+          'ya_pWvenG-kZ5V5VhMfpmu1CNRiK5xVmiAUAPXxn'
+        )
+        console.log(clarApp)
+      `})
+  setTimeout(function(){
+    window.close()
+  }, 2000)
 }
 
 function renderHTML(value) {
@@ -38,7 +62,7 @@ function cleanFeed() {
       `})
   setTimeout(function(){
     window.close()
-  }, 1000)
+  }, 2000)
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -51,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
       cleanFeed()
     }else{
       renderHTML('Please navigate to https://www.linkedin.com/mynetwork/')
+      consoleLog()
     }
   })
 })
