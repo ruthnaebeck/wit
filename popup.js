@@ -20,15 +20,18 @@ function consoleLog() {
         'zYOQwhlm1J3ylwqW4AZyArXbDvmxMfNh521S4iYH',
         'ya_pWvenG-kZ5V5VhMfpmu1CNRiK5xVmiAUAPXxn'
       )
-      clarApp.models.predict('c0c0ac362b03416da06ab3fa36fb58e3', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAvzAAAAJDAxZGE0OWM4LTk3M2UtNDE5Ny1iM2YxLTkxOGJmMDFjZGQwZg.jpg')
+      var images = document.querySelectorAll('.lazy-image.EntityPhoto-circle-7.loaded')
+      images.forEach(image => {
+        clarApp.models.predict('c0c0ac362b03416da06ab3fa36fb58e3', image.src)
         .then(
           function(response) {
-            console.log('Response', response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[1].name, response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[1].value)
+            console.log(image.alt, response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[1].name, response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[1].value)
           },
           function(err) {
             console.log('Error', err)
           }
         )
+      })
     `})
   setTimeout(function(){
     window.close()
