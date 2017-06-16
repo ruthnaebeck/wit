@@ -15,7 +15,7 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://www.linkedin.com/mynetwork/"],
+      "matches": ["https://www.linkedin.com/mynetwork/*"],
       "js": ["clarifai.js"]
     }
   ]

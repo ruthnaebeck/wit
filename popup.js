@@ -13,7 +13,7 @@ function getCurrentTabUrl(callback) {
   })
 }
 
-function consoleLog() {
+function filterByWomen() {
   chrome.tabs.executeScript(null,
     {code: `
       var clarApp = new Clarifai.App(
@@ -44,7 +44,8 @@ function consoleLog() {
             }
           },
           function(err) {
-            console.log('Error', err)
+            console.log(err)
+            console.log('Error on', image.alt)
           }
         )
       })
@@ -56,15 +57,6 @@ function consoleLog() {
 
 function renderHTML(value) {
   document.getElementById('witLI').innerHTML = value;
-}
-
-function onScroll() {
-  chrome.tabs.executeScript(null,
-    {code: `
-      window.addEventListener('scroll', function(e){
-        console.log('test', document.documentElement.scrollHeight)
-      })
-    `})
 }
 
 function cleanFeed() {
@@ -83,10 +75,9 @@ function cleanFeed() {
 
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
-    if(url === 'https://www.linkedin.com/mynetwork/'){
-      renderHTML('Analyzing...')
-      consoleLog()
-      onScroll()
+    if(url.indexOf('https://www.linkedin.com/mynetwork/') > -1){
+      renderHTML('Working...')
+      filterByWomen()
     }else if(url === 'https://www.linkedin.com/feed/'){
       renderHTML('Feed will be cleaned as you scroll.')
       cleanFeed()
