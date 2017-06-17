@@ -13,9 +13,6 @@ function getCurrentTabUrl(callback) {
   })
 }
 
-// function displayResults(){
-console.log('D3', d3)
-
 function filterByWomen() {
   chrome.tabs.executeScript(null,
     {code: `
