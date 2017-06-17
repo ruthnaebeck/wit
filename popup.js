@@ -16,37 +16,8 @@ function getCurrentTabUrl(callback) {
 function filterByWomen() {
   chrome.tabs.executeScript(null,
     {code: `
-      var images = document.querySelectorAll('.lazy-image.EntityPhoto-circle-7.loaded')
-      images.forEach(image => {
-        clarApp.models.predict('c0c0ac362b03416da06ab3fa36fb58e3', image.src)
-        .then(
-          function(response) {
-            var genders = response.outputs[0].data.regions[0].data.face.gender_appearance.concepts
-            var percentFemale = 0
-            var gender = 'unknown'
-            if(genders[0].name === 'feminine'){
-              gender = genders[0].name
-              percentFemale = genders[0].value
-            }else{
-              gender = genders[1].name
-              percentFemale = genders[1].value
-            }
-            console.log(image.alt, gender, percentFemale)
-            if(percentFemale < .5){
-              image.closest('li.mn-pymk-list__card').remove()
-              console.log('REMOVED')
-            }else{
-              console.log('FEMALE')
-            }
-          },
-          function(err) {
-            console.log(err)
-            console.log('Error on', image.alt)
-          }
-        )
-      })
-      var images = document.querySelectorAll('.lazy-image.EntityPhoto-circle-7.ghost-person.loaded')
-      images.forEach(image => {
+      var ghosts = document.querySelectorAll('.lazy-image.EntityPhoto-circle-7.ghost-person.loaded')
+      ghosts.forEach(image => {
         var firstName = image.alt.split(' ')[0]
         var url = 'https://gender-api.com/get?key=QSDnnVxVVRusljFLBB&name=' + firstName
         fetch(url)
@@ -60,11 +31,23 @@ function filterByWomen() {
             console.log('FEMALE', result.name)
           }
         })
-      },
-        function(err) {
-          console.log(err)
-          console.log('Error on', image.alt)
-        })
+      })
+      var images = document.querySelectorAll('.lazy-image.EntityPhoto-circle-7.loaded:not(.ghost-person)')
+      var data = {}
+      var nodeArr = []
+      images.forEach(image => {
+        let id = image.parentNode.id
+        if(!data[id]){
+          nodeArr.push(image)
+          data[id] = {
+            alt: image.alt,
+            node: image,
+            src: image.src,
+            femalePercent: null
+          }
+        }
+      })
+      femalePercent(data, nodeArr)
     `})
   setTimeout(function(){
     window.close()

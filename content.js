@@ -1,34 +1,40 @@
 /* global Clarifai clarKey clarSecret */
 
 var clarApp = new Clarifai.App(clarKey, clarSecret)
-console.log(clarApp)
 
-function femalePercent(images){
-  for(var image in images){
-    clarApp.models.predict('c0c0ac362b03416da06ab3fa36fb58e3', images[image].src)
+function femalePercent(data, nodeArr){
+  var i = 0
+  var len = nodeArr.length - 1
+  function filter(){
+    console.log('x', nodeArr[i], i)
+    clarApp.models.predict('c0c0ac362b03416da06ab3fa36fb58e3', nodeArr[i].src)
     .then(
       function(response) {
+        i++
         var genders = response.outputs[0].data.regions[0].data.face.gender_appearance.concepts
+        let percentFemale = 0
         if(genders[0].name === 'feminine'){
-          images[image].femalePercent = genders[0].value
-          // console.log(images[image].femalePercent)
+          percentFemale = genders[0].value
         }else{
-          images[image].femalePercent = genders[1].value
-          // console.log(images[image].femalePercent)
+          percentFemale = genders[1].value
         }
-        // console.log(image.alt, gender, percentFemale)
-        // if(percentFemale < .5){
-        //   image.closest('li.mn-pymk-list__card').remove()
-        //   console.log('REMOVED')
-        // }else{
-        //   console.log('FEMALE')
-        // }
-        console.log(images)
+        console.log(nodeArr[i].alt, percentFemale)
+        if(percentFemale < 0.5){
+          nodeArr[i - 1].closest('li.mn-pymk-list__card').remove()
+          console.log('REMOVED')
+        }else{
+          console.log('FEMALE')
+        }
       },
       function(err) {
+        i++
         console.log(err)
-        console.log('Error on', image.alt)
+        console.log('Error on', nodeArr[i - 1].alt)
       }
     )
+    if(i < len){
+      setTimeout(filter, 500)
+    }
   }
+  filter()
 }
