@@ -12,6 +12,10 @@ If you want to use this extension, see the install instructions listed below.
 
 ![LinkWithWomen](/readme/Demo.gif?raw=true "My Network")
 
+# Presentation
+
+[![Women in Tech Presentation](/readme/Presentation.jpg)](https://slides.com/ruthnaebeck/linkwithwomen/)
+
 # Install Instructions
 
 Sign-up for a FREE API key from Clarifai:<br/>
