@@ -16,7 +16,11 @@
   "content_scripts": [
     {
       "matches": ["https://www.linkedin.com/mynetwork/*"],
-      "js": ["clarifai.js"]
+      "js": ["clarifai.js", "d3.min.js"]
     }
-  ]
+  ],
+  "background": {
+    "scripts": ["d3.min.js"]
+  }
+
 }

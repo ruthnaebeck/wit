@@ -1,9 +1,19 @@
 body {
   font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
   font-size: 100%;
-  height: 80px;
+  height: 300px;
   width:550px;
   margin:0 !important;
+}
+
+
+
+#grad {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, red, yellow); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, red, yellow); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, red, yellow); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, red, yellow); /* Standard syntax */
 }
 
 #banner{
@@ -11,10 +21,11 @@ body {
   top:0;
   height:80px;
   width:100vw;
-  background: rgb(41, 116, 119);
-  background -webkit-linear-gradient(rgb(41,116,119), #00FFFF);
-  background: -mox-linear-gradient(rgb(41,116,119), #00FFFF);
-  background: linear-gradient(rgb(41,116,119), #00FFFF);
+  background: rgba(1, 146, 190, 1);
+  background -webkit-linear-gradient(left top, rgba(1, 146, 190, 1), #40bfc1);
+  background: -o-linear-gradient(bottom right, rgba(1, 146, 190, 1), #40bfc1); /* For Opera 11.1 to 12.0 */
+  background: -mox-linear-gradient(bottom right, rgba(1, 146, 190, 1), #40bfc1);
+  background: linear-gradient(to bottom right, rgba(1, 146, 190, 1), #40bfc1);
   display:flex;
   justify-content:left;
   align-items:center;
@@ -28,41 +39,61 @@ body {
     -ms-user-select: none;
     /*top:60px;*/
     right:50px;
-    top:25px;
+    bottom:25px;
+    /*background:#40bfc1;*/
 }
 .onoffswitch-checkbox {
     display: none;
 }
 .onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #999999;
+    border-radius: 20px;
 }
 .onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
+    display: block; width:
+    200%; margin-left: -100%;
     transition: margin 0.3s ease-in 0s;
 }
 .onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 14px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
     box-sizing: border-box;
 }
 .onoffswitch-inner:before {
     content: "ON";
     padding-left: 10px;
-    background-color: #34A7C1; color: #FFFFFF;
+    background-color: #40bfc1;
+    color: #FFFFFF;
 }
 .onoffswitch-inner:after {
     content: "OFF";
     padding-right: 10px;
-    background-color: #EEEEEE; color: #999999;
+    background-color: #EEEEEE;
+    color: #999999;
     text-align: right;
 }
 .onoffswitch-switch {
-    display: block; width: 18px; margin: 6px;
+    display: block;
+    width: 18px;
+    margin: 6px;
     background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
     right: 56px;
-    border: 2px solid #999999; border-radius: 20px;
+    border: 2px solid #999999;
+    border-radius: 20px;
     transition: all 0.3s ease-in 0s;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
