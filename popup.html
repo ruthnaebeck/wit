@@ -2,23 +2,26 @@
 <html>
   <head>
     <title>Women in Tech</title>
-    <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
-      }
-      #witLI {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
-      }
-    </style>
-    <script src="popup.js"></script>
-  </head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Overpass|Playfair+Display" rel="stylesheet">  </head>
   <body>
-    <div id="witLI"></div>
+    <div id="banner">
+      <h3> Link with Women </h3>
+    </div>
+
+    <main>
+      <div id="witLI"></div>
+    </main>
+
+    <div class="onoffswitch">
+      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+      <label class="onoffswitch-label" for="myonoffswitch">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+      </label>
+    </div>
+
+    <script src="popup.js"></script>
   </body>
 </html>
 
