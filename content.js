@@ -6,7 +6,7 @@ function femalePercent(data, nodeArr){
   var i = 0
   var len = nodeArr.length - 1
   function filter(){
-    console.log('x', nodeArr[i], i)
+    // console.log('x', nodeArr[i], i)
     clarApp.models.predict('c0c0ac362b03416da06ab3fa36fb58e3', nodeArr[i].src)
     .then(
       function(response) {
@@ -18,13 +18,14 @@ function femalePercent(data, nodeArr){
         }else{
           percentFemale = genders[1].value
         }
-        console.log(nodeArr[i].alt, percentFemale)
+        // console.log(nodeArr[i].alt, percentFemale)
         if(percentFemale < 0.5){
           nodeArr[i - 1].closest('li.mn-pymk-list__card').remove()
-          console.log('REMOVED')
-        }else{
-          console.log('FEMALE')
+          // console.log('REMOVED')
         }
+        // else{
+        //   console.log('FEMALE')
+        // }
       },
       function(err) {
         i++
