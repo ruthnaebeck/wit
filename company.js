@@ -16,35 +16,6 @@ function getCurrentTabUrl(callback) {
 function filterByWomen() {
   chrome.tabs.executeScript(null,
     {code: `
-      var images = document.querySelectorAll('.lazy-image.EntityPhoto-circle-7.loaded')
-      images.forEach(image => {
-        clarApp.models.predict('c0c0ac362b03416da06ab3fa36fb58e3', image.src)
-        .then(
-          function(response) {
-            var genders = response.outputs[0].data.regions[0].data.face.gender_appearance.concepts
-            var percentFemale = 0
-            var gender = 'unknown'
-            if(genders[0].name === 'feminine'){
-              gender = genders[0].name
-              percentFemale = genders[0].value
-            }else{
-              gender = genders[1].name
-              percentFemale = genders[1].value
-            }
-            console.log(image.alt, gender, percentFemale)
-            if(percentFemale < .5){
-              image.closest('li.mn-pymk-list__card').remove()
-              console.log('REMOVED')
-            }else{
-              console.log('FEMALE')
-            }
-          },
-          function(err) {
-            console.log(err)
-            console.log('Error on', image.alt)
-          }
-        )
-      })
       var images = document.querySelectorAll('.lazy-image.EntityPhoto-circle-7.ghost-person.loaded')
       images.forEach(image => {
         var firstName = image.alt.split(' ')[0]
@@ -55,7 +26,7 @@ function filterByWomen() {
           console.log(result)
           if (result.accuracy >= 60 && result.gender === 'male') {
             image.closest('li.mn-pymk-list__card').remove()
-            console.log('REMOVED', result.name)
+            console.log('REMOVED')
           }else{
             console.log('FEMALE', result.name)
           }
@@ -102,26 +73,6 @@ function companyFilter() {
           console.log('Error on', image.alt)
         })
       })
-      var images = document.querySelectorAll('.lazy-image.ghost-person.loaded')
-      images.forEach(image => {
-        var firstName = image.alt.split(' ')[0]
-        var url = 'https://gender-api.com/get?key=QSDnnVxVVRusljFLBB&name=' + firstName
-        fetch(url)
-        .then(result => result.json())
-        .then(result => {
-          console.log(result)
-          if (result.accuracy >= 60 && result.gender === 'male') {
-            image.closest('div.search-result__wrapper').remove()
-            console.log('REMOVED', result.name)
-          }else{
-            console.log('FEMALE', result.name)
-          }
-        })
-      },
-        function(err) {
-          console.log(err)
-          console.log('Error on', image.alt)
-        })
     `})
   setTimeout(function(){
     window.close()
@@ -148,16 +99,17 @@ function cleanFeed() {
 
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
-    if(url.indexOf('https://www.linkedin.com/mynetwork/') > -1){
+    if (url.indexOf('https://www.linkedin.com/mynetwork/') > -1){
       renderHTML('Working...')
       filterByWomen()
-    }else if(url === 'https://www.linkedin.com/feed/'){
+    } else if (url === 'https://www.linkedin.com/feed/'){
       renderHTML('Feed will be cleaned as you scroll.')
       cleanFeed()
-    }else if (url.indexOf('https://www.linkedin.com/search/results/people/?facetCurrentCompany=') > -1){
+    } else if (url.indexOf('https://www.linkedin.com/search/results/people/?facetCurrentCompany=') > -1){
       renderHTML('Working...')
       companyFilter()
-    }else{
+    }
+    else {
       renderHTML('Please navigate to https://www.linkedin.com/mynetwork/')
     }
   })
