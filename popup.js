@@ -49,6 +49,26 @@ function filterByWomen() {
           }
         )
       })
+      var images = document.querySelectorAll('.lazy-image.EntityPhoto-circle-7.ghost-person.loaded')
+      images.forEach(image => {
+        var firstName = image.alt.split(' ')[0]
+        var url = 'https://gender-api.com/get?key=QSDnnVxVVRusljFLBB&name=' + firstName
+        fetch(url)
+        .then(result => result.json())
+        .then(result => {
+          console.log(result)
+          if (result.accuracy >= 60 && result.gender === 'male') {
+            image.closest('li.mn-pymk-list__card').remove()
+            console.log('REMOVED', result.name)
+          }else{
+            console.log('FEMALE', result.name)
+          }
+        })
+      },
+        function(err) {
+          console.log(err)
+          console.log('Error on', image.alt)
+        })
     `})
   setTimeout(function(){
     window.close()
