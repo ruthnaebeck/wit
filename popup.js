@@ -16,10 +16,6 @@ function getCurrentTabUrl(callback) {
 function filterByWomen() {
   chrome.tabs.executeScript(null,
     {code: `
-      var clarApp = new Clarifai.App(
-        'zYOQwhlm1J3ylwqW4AZyArXbDvmxMfNh521S4iYH',
-        'ya_pWvenG-kZ5V5VhMfpmu1CNRiK5xVmiAUAPXxn'
-      )
       var images = document.querySelectorAll('.lazy-image.EntityPhoto-circle-7.loaded')
       images.forEach(image => {
         clarApp.models.predict('c0c0ac362b03416da06ab3fa36fb58e3', image.src)
