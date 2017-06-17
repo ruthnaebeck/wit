@@ -38,3 +38,9 @@ In Chrome, navigate to:  chrome://extensions/<br/>
 Check the Developer mode check box<br/>
 Click Load unpacked extension...<br/>
 Select the wit folder<br/>
+
+# Resources
+
+https://developer.chrome.com/extensions<br/>
+https://www.clarifai.com/<br/>
+https://gender-api.com/<br/>
