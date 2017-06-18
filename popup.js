@@ -19,7 +19,7 @@ function filterByWomen() {
       var ghosts = document.querySelectorAll('.lazy-image.EntityPhoto-circle-7.ghost-person.loaded')
       ghosts.forEach(image => {
         var firstName = image.alt.split(' ')[0]
-        var url = 'https://gender-api.com/get?key=QSDnnVxVVRusljFLBB&name=' + firstName
+        var url = 'https://gender-api.com/get?key=' + genderKey + '&name=' + firstName
         fetch(url)
         .then(result => result.json())
         .then(result => {
@@ -131,17 +131,17 @@ function cleanFeed() {
 
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
-    if(url.indexOf('https://www.linkedin.com/mynetwork/') > -1){
+    if(url.indexOf('linkedin.com/mynetwork') > -1){
       renderHTML('Working...')
       filterByWomen()
-    }else if(url === 'https://www.linkedin.com/feed/'){
-      renderHTML('Feed will be cleaned as you scroll.')
+    }else if(url.indexOf('linkedin.com/feed') > -1){
+      renderHTML('Scroll to clean feed')
       cleanFeed()
-    }else if (url.indexOf('https://www.linkedin.com/search/results/people/?facetCurrentCompany=') > -1){
+    }else if (url.indexOf('linkedin.com/search') > -1){
       renderHTML('Working...')
       companyFilter()
     }else{
-      renderHTML('Please navigate to https://www.linkedin.com/mynetwork/')
+      renderHTML('Please navigate to LinkedIn')
     }
   })
 })
