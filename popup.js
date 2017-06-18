@@ -13,7 +13,8 @@ function getCurrentTabUrl(callback) {
   })
 }
 
-function filterByWomen() {
+var filterByWomen = function () {
+  console.log("RUNNING")
   chrome.tabs.executeScript(null,
     {code: `
       var clarApp = new Clarifai.App(
@@ -50,9 +51,9 @@ function filterByWomen() {
         )
       })
     `})
-  setTimeout(function(){
-    window.close()
-  }, 2000)
+  // setTimeout(function(){
+  //   window.close()
+  // }, 2000)
 }
 
 function renderHTML(value) {
@@ -68,20 +69,21 @@ function cleanFeed() {
         })
       })
     `})
-  setTimeout(function(){
-    window.close()
-  }, 2000)
+  // setTimeout(function(){
+  //   window.close()
+  // }, 2000)
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
-    if(url.indexOf('https://www.linkedin.com/mynetwork/') > -1){
-      renderHTML('Working...')
-      filterByWomen()
-    }else if(url === 'https://www.linkedin.com/feed/'){
+    // if(url.indexOf('https://www.linkedin.com/mynetwork/') > -1){
+    //   renderHTML('Working...')
+    //   // filterByWomen()
+    // }else
+    if(url === 'https://www.linkedin.com/feed/'){
       renderHTML('Feed will be cleaned as you scroll.')
       cleanFeed()
-    }else{
+    }else if(url !== 'https://www.linkedin.com/mynetwork/') {
       renderHTML('Please navigate to https://www.linkedin.com/mynetwork/')
     }
   })
