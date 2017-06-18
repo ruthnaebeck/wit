@@ -15,20 +15,24 @@ function femalePercent(data, nodeArr) {
           if (response) {
             let resUrl = response.outputs[0].input.data.image.url
             let nodeUrl = node.src
-            console.log(resUrl === nodeUrl)
-            var genders = response.outputs[0].data.regions[0].data.face.gender_appearance.concepts
-            let percentFemale = 0
-            if (genders[0].name === 'feminine') {
-              percentFemale = genders[0].value
+            if (resUrl === nodeUrl) {
+              var genders = response.outputs[0].data.regions[0].data.face.gender_appearance.concepts
+              let percentFemale = 0
+              if (genders[0].name === 'feminine') {
+                percentFemale = genders[0].value
+              } else {
+                percentFemale = genders[1].value
+              }
+              if (percentFemale < 0.5) {
+                node.closest('li.mn-pymk-list__card').remove()
+                console.log(node.alt, 'MALE')
+              }
+              else {
+                console.log(node.alt, 'FEMALE')
+              }
             } else {
-              percentFemale = genders[1].value
-            }
-            if (percentFemale < 0.5) {
-              node.closest('li.mn-pymk-list__card').remove()
-              console.log(node.alt, 'MALE')
-            }
-            else {
-              console.log(node.alt, 'FEMALE')
+              console.log('******SYNC_ISSUE********')
+              i--
             }
           }
         },
@@ -38,7 +42,7 @@ function femalePercent(data, nodeArr) {
         }
         )
       if (i < len) {
-        setTimeout(filter, 1800)
+        setTimeout(filter, 600)
       }
     }
   }
