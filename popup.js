@@ -13,7 +13,8 @@ function getCurrentTabUrl(callback) {
   })
 }
 
-function filterByWomen() {
+var filterByWomen = function () {
+  console.log("RUNNING")
   chrome.tabs.executeScript(null,
     {code: `
       var clarApp = new Clarifai.App(

@@ -1,9 +1,9 @@
 function runD3(){
   console.log("WE IN HERE:", d3)
+  filterByWomen();
 }
 
-var setupDependencies = function() {
-
+(function(){
   var head = document.getElementsByTagName("head");
   var script = document.createElement("script");
 
@@ -13,6 +13,4 @@ var setupDependencies = function() {
   script.charset = "utf-8";
   // head.appendChild(script);
   console.log('script', script)
-}
-
-setupDependencies()
+})();
