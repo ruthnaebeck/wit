@@ -1,6 +1,6 @@
 function runD3(){
   console.log("WE IN HERE:", d3)
-  filterByWomen();
+  // filterByWomen();
 }
 
 (function(){
