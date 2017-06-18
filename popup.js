@@ -23,12 +23,12 @@ function filterByWomen() {
         fetch(url)
         .then(result => result.json())
         .then(result => {
-          console.log(result)
+          // console.log(result)
           if (result.accuracy >= 60 && result.gender === 'male') {
             image.closest('li.mn-pymk-list__card').remove()
-            console.log('REMOVED', result.name)
+            console.log('MALE GHOST', result.name)
           }else{
-            console.log('FEMALE', result.name)
+            console.log('FEMALE GHOST', result.name)
           }
         })
       })
