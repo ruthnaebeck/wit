@@ -2,7 +2,7 @@
 
 A chrome extension to help you connect with more women on LinkedIn:
 
--Navigate to the My Network<br/>
+-Navigate to the My Network tab (on LinkedIn)<br/>
 -Click the Link with Women Chrome Extension icon<br/>
 -The extension will filter people currently loaded
 
