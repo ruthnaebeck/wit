@@ -21,6 +21,9 @@ If you want to use this extension, see the install instructions listed below.
 Sign-up for a FREE API key from Clarifai:<br/>
 https://developer.clarifai.com/signup/
 
+Sign-up for a FREE API key from Gender-API:<br/>
+https://gender-api.com/en/account
+
 ```
 git clone the repo
 cd wit
@@ -32,6 +35,7 @@ Add the following to secret.js (replace words with actual key and secret from pr
 ```
 const clarKey = 'CLARIFAI_ID_HERE'
 const clarSecret = 'CLARIFAI_SECRET_HERE'
+const genderKey = 'GENDER_API_KEY_HERE'
 ```
 
 In Chrome, navigate to:  chrome://extensions/<br/>
