@@ -2,7 +2,7 @@
 
 var clarApp = new Clarifai.App(clarKey, clarSecret)
 
-function femalePercent(data, nodeArr) {
+function femalePercent(nodeArr) {
   var i = 0
   var len = nodeArr.length - 1
   function filter() {
@@ -38,7 +38,7 @@ function femalePercent(data, nodeArr) {
         },
         function (err) {
           console.log(err)
-          console.log('Error on', nodeArr[i - 1].alt)
+          console.log('Error on', node.alt)
         }
         )
       if (i < len) {

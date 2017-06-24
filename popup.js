@@ -47,16 +47,32 @@ function filterByWomen() {
           }
         }
       })
-      femalePercent(data, nodeArr)
+      femalePercent(nodeArr)
     `})
   setTimeout(function(){
     window.close()
   }, 2000)
 }
 
-function companyFilter() {
+function searchFilter() {
   chrome.tabs.executeScript(null,
     {code: `
+      var ghosts = document.querySelectorAll('.lazy-image.ghost-person.loaded')
+      ghosts.forEach(image => {
+        var firstName = image.alt.split(' ')[0]
+        var url = 'https://gender-api.com/get?key=' + genderKey + '&name=' + firstName
+        fetch(url)
+        .then(result => result.json())
+        .then(result => {
+          // console.log(result)
+          if (result.accuracy >= 60 && result.gender === 'male') {
+            image.closest('div.search-result__wrapper').remove()
+            console.log('REMOVED', result.name)
+          }else{
+            console.log('FEMALE', result.name)
+          }
+        })
+      })
       var images = document.querySelectorAll('.lazy-image.loaded')
       images.forEach(image => {
         clarApp.models.predict('c0c0ac362b03416da06ab3fa36fb58e3', image.src)
@@ -85,26 +101,6 @@ function companyFilter() {
           console.log('Error on', image.alt)
         })
       })
-      var images = document.querySelectorAll('.lazy-image.ghost-person.loaded')
-      images.forEach(image => {
-        var firstName = image.alt.split(' ')[0]
-        var url = 'https://gender-api.com/get?key=QSDnnVxVVRusljFLBB&name=' + firstName
-        fetch(url)
-        .then(result => result.json())
-        .then(result => {
-          console.log(result)
-          if (result.accuracy >= 60 && result.gender === 'male') {
-            image.closest('div.search-result__wrapper').remove()
-            console.log('REMOVED', result.name)
-          }else{
-            console.log('FEMALE', result.name)
-          }
-        })
-      },
-        function(err) {
-          console.log(err)
-          console.log('Error on', image.alt)
-        })
     `})
   setTimeout(function(){
     window.close()
@@ -139,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
       cleanFeed()
     }else if (url.indexOf('linkedin.com/search') > -1){
       renderHTML('Working...')
-      companyFilter()
+      searchFilter()
     }else{
       renderHTML('Please navigate to LinkedIn')
     }
