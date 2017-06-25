@@ -53,4 +53,4 @@ https://gender-api.com/<br/>
 
 On the LinkedIn Home tab, use this extension to remove "Person X Connected with Person Y" notifications.  Feature works as you scroll.
 
-On the LinkedIn Jobs tab, use this extension to filter down to LinkedIn Easy Apply jobs.  Currently, the extension will only work on loaded jobs.  Scroll to the bottom of the search results to load all jobs.
+On the LinkedIn Jobs tab, use this extension to filter down to LinkedIn Easy Apply jobs.  Feature works as you scroll.
