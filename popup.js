@@ -119,6 +119,7 @@ function cleanFeed() {
           e.parentNode.removeChild(e);
         })
       })
+      window.scroll(0, 1)
     `});
   setTimeout(function(){
     window.close();
@@ -128,12 +129,16 @@ function cleanFeed() {
 function jobsFilter() {
   chrome.tabs.executeScript(null,
     {code: `
-      var jobPosts = document.querySelectorAll('.card-list__item.job-card.job-card--column.ember-view')
-      jobPosts.forEach(post =>{
-	      if(!post.querySelector('.job-card__easy-apply-text.job-card__easy-apply-text')){
-          post.style.display = 'none'
-        }
+      window.addEventListener('scroll', function(e){
+        [].forEach.call(document.querySelectorAll('.card-list__item.job-card.job-card--column.ember-view'),function(post){
+          if(post.querySelector('.job-card__footer')){
+            if(!post.querySelector('.job-card__easy-apply-text.job-card__easy-apply-text')){
+              post.style.display = 'none';
+            }
+          }
+        })
       })
+      window.scroll(0, 1)
     `});
   setTimeout(function(){
     window.close();
@@ -146,13 +151,13 @@ document.addEventListener('DOMContentLoaded', function() {
       renderHTML('Working...');
       filterByWomen();
     }else if(url.indexOf('linkedin.com/feed') > -1){
-      renderHTML('Scroll to clean feed');
+      renderHTML('Scroll to filter');
       cleanFeed();
     }else if (url.indexOf('linkedin.com/search') > -1){
       renderHTML('Working...');
       searchFilter();
     }else if (url.indexOf('linkedin.com/jobs') > -1){
-      renderHTML('Filtering...');
+      renderHTML('Scroll to filter');
       jobsFilter();
     }else{
       renderHTML('Page Not Supported');
