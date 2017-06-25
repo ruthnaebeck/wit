@@ -4,13 +4,13 @@ function getCurrentTabUrl(callback) {
   var queryInfo = {
     active: true,
     currentWindow: true
-  }
+  };
   chrome.tabs.query(queryInfo, function(tabs) {
-    var tab = tabs[0]
-    var url = tab.url
-    console.assert(typeof url == 'string', 'tab.url should be a string')
-    callback(url)
-  })
+    var tab = tabs[0];
+    var url = tab.url;
+    console.assert(typeof url == 'string', 'tab.url should be a string');
+    callback(url);
+  });
 }
 
 function filterByWomen() {
@@ -48,10 +48,10 @@ function filterByWomen() {
         }
       })
       femalePercent(nodeArr)
-    `})
+    `});
   setTimeout(function(){
-    window.close()
-  }, 2000)
+    window.close();
+  }, 2000);
 }
 
 function searchFilter() {
@@ -101,10 +101,10 @@ function searchFilter() {
           console.log('Error on', image.alt)
         })
       })
-    `})
+    `});
   setTimeout(function(){
-    window.close()
-  }, 2000)
+    window.close();
+  }, 2000);
 }
 
 function renderHTML(value) {
@@ -119,25 +119,43 @@ function cleanFeed() {
           e.parentNode.removeChild(e);
         })
       })
-    `})
+    `});
   setTimeout(function(){
-    window.close()
-  }, 2000)
+    window.close();
+  }, 2000);
+}
+
+function jobsFilter() {
+  chrome.tabs.executeScript(null,
+    {code: `
+      var jobPosts = document.querySelectorAll('.card-list__item.job-card.job-card--column.ember-view')
+      jobPosts.forEach(post =>{
+	      if(!post.querySelector('.job-card__easy-apply-text.job-card__easy-apply-text')){
+          post.remove()
+        }
+      })
+    `});
+  setTimeout(function(){
+    window.close();
+  }, 2000);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
     if(url.indexOf('linkedin.com/mynetwork') > -1){
-      renderHTML('Working...')
-      filterByWomen()
+      renderHTML('Working...');
+      filterByWomen();
     }else if(url.indexOf('linkedin.com/feed') > -1){
-      renderHTML('Scroll to clean feed')
-      cleanFeed()
+      renderHTML('Scroll to clean feed');
+      cleanFeed();
     }else if (url.indexOf('linkedin.com/search') > -1){
-      renderHTML('Working...')
-      searchFilter()
+      renderHTML('Working...');
+      searchFilter();
+    }else if (url.indexOf('linkedin.com/jobs') > -1){
+      renderHTML('Filtering...');
+      jobsFilter();
     }else{
-      renderHTML('Please navigate to LinkedIn')
+      renderHTML('Page Not Supported');
     }
-  })
-})
+  });
+});
