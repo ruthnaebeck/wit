@@ -33,9 +33,9 @@ touch secret.js
 Add the following to secret.js (replace words with actual keys and secret from sign-up step):
 
 ```
-const clarKey = 'CLARIFAI_ID_HERE'
-const clarSecret = 'CLARIFAI_SECRET_HERE'
-const genderKey = 'GENDER_API_KEY_HERE'
+const clarKey = 'CLARIFAI_ID_HERE';
+const clarSecret = 'CLARIFAI_SECRET_HERE';
+const genderKey = 'GENDER_API_KEY_HERE';
 ```
 
 In Chrome, navigate to:  chrome://extensions/<br/>
@@ -48,3 +48,9 @@ Select the wit folder<br/>
 https://developer.chrome.com/extensions<br/>
 https://www.clarifai.com/<br/>
 https://gender-api.com/<br/>
+
+# Bonus Features
+
+On the LinkedIn Home tab, use this extension to remove "Person X Connected with Person Y" notifications.  Feature works as you scroll.
+
+On the LinkedIn Jobs tab, use this extension to filter down to LinkedIn Easy Apply jobs.  Currently, the extension will only work on loaded jobs.  Scroll to the bottom of the search results to load all jobs.
