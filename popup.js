@@ -131,7 +131,7 @@ function jobsFilter() {
       var jobPosts = document.querySelectorAll('.card-list__item.job-card.job-card--column.ember-view')
       jobPosts.forEach(post =>{
 	      if(!post.querySelector('.job-card__easy-apply-text.job-card__easy-apply-text')){
-          post.remove()
+          post.style.display = 'none'
         }
       })
     `});
