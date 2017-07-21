@@ -16,6 +16,10 @@ If you want to use this extension, see the install instructions listed below.
 
 [![Women in Tech Presentation](/readme/Presentation.jpg)](https://slides.com/ruthnaebeck/linkwithwomen/)
 
+# Press
+
+07/20/2017 - Forbes.com - [How Capital One Supports Diversity From Top To Bottom](/readme/ForbesArticle.pdf)
+
 # Install Instructions
 
 Sign-up for a FREE API key from Clarifai:<br/>
