@@ -1,6 +1,8 @@
 /* global Clarifai clarKey clarSecret */
 
-var clarApp = new Clarifai.App(clarKey, clarSecret);
+var clarApp = new Clarifai.App({
+  apiKey: clarKey
+});
 
 function femalePercent(nodeArr) {
   var i = 0;

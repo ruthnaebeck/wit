@@ -37,8 +37,7 @@ touch secret.js
 Add the following to secret.js (replace words with actual keys and secret from sign-up step):
 
 ```
-const clarKey = 'CLARIFAI_ID_HERE';
-const clarSecret = 'CLARIFAI_SECRET_HERE';
+const clarKey = 'CLARIFAI_API_KEY_HERE';
 const genderKey = 'GENDER_API_KEY_HERE';
 ```
 
