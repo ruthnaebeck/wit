@@ -34,7 +34,7 @@ cd wit
 touch secret.js
 ```
 
-Add the following to secret.js (replace words with actual keys and secret from sign-up step):
+Add the following to secret.js (replace words with actual keys from sign-up step):
 
 ```
 const clarKey = 'CLARIFAI_API_KEY_HERE';
