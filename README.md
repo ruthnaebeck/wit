@@ -32,7 +32,7 @@ https://gender-api.com/en/account
 git clone <the_repo_link>
 ```
 
-Rename secret.js.example to secret.js and replace the words with actual keys from sign-up step:
+Rename `secret.js.example` to `secret.js` and replace the words with actual keys from the sign-up step:
 
 ```
 const clarKey = 'CLARIFAI_API_KEY_HERE';
